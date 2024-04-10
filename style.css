@@ -35,21 +35,23 @@ header{
     grid-column: 1/5;
     grid-row: 1/2;
     padding:0 2vw;
+    z-index: 2;
 }
 .hover{
     grid-row: 5/6;
     grid-column: 4/5;
 }
-.project, .task, .form, aside{
+.project, .task, .form1, .form2, aside{
     display: none;
 }
-.form{
+.form1, .form2{
     grid-column: 2/4;
     grid-row: 2/4;
     align-self: center;
     justify-self: center;
     flex-direction: column;
     gap: 10px;
+    z-index: 2;
 }    
 .plus{
     background: purple;
@@ -58,11 +60,20 @@ header{
     display: inline-block;
 }
 aside{
-    background-color: blueviolet;
+    background-color: purple;
+    grid-row: 1/6;
+    grid-column: 1/2;
+    width: 80%;
 }
 footer{
     grid-row: 5/6;
     grid-column: 1/5;
     justify-self: center;
     align-self: self-end;
+}
+.close{
+    width: 20px;
+}
+.block{
+    display: block;
 }
