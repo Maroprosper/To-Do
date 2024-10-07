@@ -30,6 +30,7 @@ let updateTask = (task, status) => {
 let deleteToDo = () => {};
 let deleteProject = () => {};
 let updateProjectName = () => {};
+
 let decideProject = (value, project) => {
   let answer = 0;
   project.forEach(element => {

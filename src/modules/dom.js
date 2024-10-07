@@ -10,6 +10,22 @@ const sideMenu = (element) => {
     aside.appendChild(projects);
     element.appendChild(aside);
 };
+const choosePriority = (value) => {
+    switch (value) {
+      case '#add8e6':
+        return  'Trivial';
+      break;
+      case '#008000':
+        return  'Normal';
+      break;
+      case '#ff0000':
+        return  'Critical';
+      break;
+      case '#808080':
+        return  'None';
+      break;  
+    }
+};
 const popOut = (element) => {
     const task = document.createElement("div");
     task.textContent = "Add Task";
@@ -60,8 +76,8 @@ const popUp = (element) => {
     query.textContent = "--Choose task priority--";
     query.value = "";
     priority.appendChild(query);
-    const priorities = [{name: "Trivial", value: ""},{name:"Normal", value: ""},
-{name:"Critical", value: ""}, {name: "None", value: ""}];
+    const priorities = [{name: "Trivial", value: "#add8e6"},{name:"Normal", value: "#008000"},
+{name:"Critical", value: "#ff0000"}, {name: "None", value: "#808080"}];
     let dropDown = [];
     for(let i = 0; i < priorities.length; i++){
         dropDown[i] = document.createElement('option');
@@ -111,13 +127,25 @@ const popPro = (element) => {
         form.style.display = 'none';
 });
 }
+const updateTaskDisplay = (array, node) => {
+    const container = document.createElement('ul');
+    let list = [];
+    for(let i = 0; i < array.length; i++){
+        list[i] = document.createElement('li');
+        list[i].textContent = array[i].title;
+        list[i].classList.toggle('listItems');
+        container.appendChild(list[i]);
+    }
+    node.appendChild(container);
+};
 const displayProjects = (projects) => {
     const context = document.querySelector(".list");
     context.innerHTML = "";
     for(let i = 0;i < projects.length; i++){
         let list = [];
         list[i] = document.createElement('li');
-        list[i].textContent  = projects[i].name;
+        list[i].textContent  = `${projects[i].name} (${(projects[i].tasks).length})`;
+        updateTaskDisplay(projects[i].tasks, list[i]);
         context.appendChild(list[i]);
     }
     console.log(projects);
@@ -144,13 +172,53 @@ const updateList = (node, options) => {
 const displayTasks = (element, project) => {
     let list = [];
     let title = [];
+    let description = [];
+    let deadline = [];
+    let priority = [];
+    let projects = [];
+    let category = [];
+    let status = [];
+    let tasks = [];
     element.innerHTML = '';
     for(let i = 0; i < project.length; i++){
         for(let j = 0; j < (project[i].tasks).length; j++){
             list.push(document.createElement('div'));
-            
+            title.push(document.createElement('h1'));
+            description.push(document.createElement('p'));
+            deadline.push(document.createElement('div'));
+            priority.push(document.createElement('div'));
+            projects.push(document.createElement('div'));
+            category.push(project[i].name);
+            status.push(document.createElement('input'));
+            tasks.push((project[i].tasks)[j]);
         }
     }
-
+    for(let k = 0; k < tasks.length; k++){
+        list[k].classList.toggle('taskContainer');
+        title[k].classList.toggle('taskName');
+        description[k].classList.toggle('taskDesc');
+        deadline[k].classList.toggle('taskDead');
+        priority[k].classList.toggle('taskPrior');
+        projects[k].classList.toggle('taskDir');
+        status[k].classList.toggle('taskCheck');
+        status[k].type = 'checkbox';
+        title[k].textContent = tasks[k].title;
+        description[k].textContent = tasks[k].description;
+        deadline[k].textContent = tasks[k].dueDate;
+        priority[k].textContent = choosePriority(tasks[k].priority);
+        projects[k].textContent = category[k];
+        list[k].appendChild(title[k]);
+        list[k].appendChild(description[k]);
+        list[k].appendChild(deadline[k]);
+        list[k].appendChild(priority[k]);
+        list[k].appendChild(projects[k]);
+        list[k].appendChild(status[k]);
+        list[k].style.borderLeft = `2px solid ${tasks[k].priority}`;
+        element.appendChild(list[k]);
+    }
 }
-export {sideMenu, popUp, popOut, popPro, displayProjects, reset, updateList};
+const close = () => {
+    document.querySelector('.form2').style.display = 'none';
+    document.querySelector('.form1').style.display = 'none';
+};
+export {sideMenu, popUp, popOut, popPro, displayProjects, reset, updateList, displayTasks, close};

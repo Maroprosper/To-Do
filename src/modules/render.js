@@ -21,6 +21,7 @@ const body = document.querySelector("body");
         document.querySelector('aside').classList.toggle('block');
     });
     const main = document.createElement("main");
+    main.id = "main";
     const hover = document.createElement("div");
     hover.classList.toggle("hover");
     const hoverText = document.createElement("div");
