@@ -24,14 +24,16 @@ const body = document.querySelector("body");
     main.id = "main";
     const hover = document.createElement("div");
     hover.classList.toggle("hover");
-    const hoverText = document.createElement("div");
+    const hoverBlock = document.createElement("div");
+    const hoverText = document.createElement("p");
     hoverText.textContent = "+";
     hoverText.classList.toggle("plus");
-    hover.appendChild(hoverText);
+    hoverBlock.appendChild(hoverText);
+    hover.appendChild(hoverBlock);
     popOut(hover);
     popUp(body);
     popPro(body);
-    hoverText.addEventListener("click", (e) => {
+    hoverBlock.addEventListener("click", (e) => {
         document.querySelector('.task').classList.toggle('block');
         document.querySelector('.project').classList.toggle('block');
         if(hoverText.textContent === '+'){

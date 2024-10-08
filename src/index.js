@@ -18,7 +18,7 @@ document.querySelector('#submit').addEventListener('click', () => {
     close();
 });
 document.querySelector('#click').addEventListener('click', () => {
-    addTask((projects[decideProject(projectDrop.value, projects)].tasks),createTask(TaskTitle.value,TaskDesc.value,TaskDate.value, TaskPrior.value, 'false'))
+    addTask((projects[decideProject(projectDrop.value, projects)].tasks),createTask(TaskTitle.value,TaskDesc.value,TaskDate.value, TaskPrior.value , 'false'))
     reset(projectDrop,TaskTitle, TaskDesc, TaskPrior, TaskDate);
     displayTasks(taskDisplay,projects);
     displayProjects(projects);

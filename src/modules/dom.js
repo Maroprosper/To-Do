@@ -4,6 +4,7 @@ const sideMenu = (element) => {
     project.textContent = "Projects";
     aside.appendChild(project);
     const projects = document.createElement("div");
+    projects.classList.add('taskBox');
     const list = document.createElement("ul");
     list.classList.toggle("list");
     projects.appendChild(list);
@@ -23,7 +24,9 @@ const choosePriority = (value) => {
       break;
       case '#808080':
         return  'None';
-      break;  
+      break;
+      default:
+        return 'None';
     }
 };
 const popOut = (element) => {
@@ -143,10 +146,17 @@ const displayProjects = (projects) => {
     context.innerHTML = "";
     for(let i = 0;i < projects.length; i++){
         let list = [];
-        list[i] = document.createElement('li');
+        let items = [];
+        list[i] = document.createElement('div');
+        items[i] = document.createElement('div');
+        items[i].classList.add('none');
         list[i].textContent  = `${projects[i].name} (${(projects[i].tasks).length})`;
-        updateTaskDisplay(projects[i].tasks, list[i]);
+        updateTaskDisplay(projects[i].tasks, items[i]);
+        list[i].appendChild(items[i]);
         context.appendChild(list[i]);
+        list[i].addEventListener("click", () => {
+            items[i].classList.toggle('block');
+        });
     }
     console.log(projects);
 };

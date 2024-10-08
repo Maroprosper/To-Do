@@ -1,5 +1,5 @@
 let projects = [];
-let createTask = function (title, description, dueDate, priority, status) {
+let createTask = function (title, description, dueDate, priority = '#808080', status) {
     return { title, description, dueDate, priority, status };
   };
 let addTask = function (project, task) {
