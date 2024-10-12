@@ -1,6 +1,9 @@
 let projects = [];
-let createTask = function (title, description, dueDate, priority = '#808080', status) {
-    return { title, description, dueDate, priority, status };
+let createTask = function (title, description, dueDate, priority, status = false, number) {
+  if (priority == ''){
+    priority = '#808080';
+  }
+  return { title, description, dueDate, priority, status, number };
   };
 let addTask = function (project, task) {
     project.push(task);
@@ -24,10 +27,14 @@ let updateTaskDueDate = (task, dueDate) => {
 let updateTaskPriority = (task, priority) => {
     task.priority = priority;
   };
-let updateTask = (task, status) => {
-    task.status = status;
-  };
-let deleteToDo = () => {};
+let updateTask = (projects, project,index, value) => {
+  (((projects[project]).tasks)[index]).status = value;
+    return projects;
+};
+let deleteToDo = (projects, project, index) => {
+    ((projects[project]).tasks).splice(index, 1); 
+    return projects;
+};
 let deleteProject = () => {};
 let updateProjectName = () => {};
 
@@ -40,6 +47,7 @@ let decideProject = (value, project) => {
   });
   return answer;
 }
+
 let general = createProject('Default', 'This is the default project directory for this app');
 addProject(general);
-export {createTask, addTask,createProject,addProject, projects, decideProject};
+export {createTask, addTask,updateTask,createProject,addProject, projects, decideProject, deleteToDo};

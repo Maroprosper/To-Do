@@ -1,3 +1,5 @@
+//render.js
+
 import { popUp, popPro, popOut, sideMenu } from "./dom";
 const body = document.querySelector("body");
   const layout = () => {
